@@ -6,7 +6,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Geometry
 {
@@ -27,7 +26,7 @@ namespace Geometry
 
         public GameObject IntersectionGo;
 
-        public IIntersection IntersectionTarget => IntersectionGo?.GetComponent<IIntersection>();
+        public IIntersection IntersectionTarget => !IntersectionGo ? null : IntersectionGo.GetComponent<IIntersection>();
 
         public Vector2 Center => new Vector2(transform.position.x, transform.position.z);
 
@@ -38,6 +37,24 @@ namespace Geometry
         public float StartAngle => DirectionAngle - Angle * 0.5f;
 
         public float EndAngle => DirectionAngle + Angle * 0.5f;
+
+        public Vector2 StartArcPoint
+        {
+            get
+            {
+                var vec3 = Quaternion.Euler(0, -StartAngle, 0) * Vector3.right;
+                return new Vector2(vec3.x, vec3.z) * Radius + Center;
+            }
+        }
+
+        public Vector2 EndArcPoint
+        {
+            get
+            {
+                var vec3 = Quaternion.Euler(0, -EndAngle, 0) * Vector3.right;
+                return new Vector2(vec3.x, vec3.z) * Radius + Center;
+            }
+        }
 
         private void OnDrawGizmos()
         {
@@ -58,6 +75,10 @@ namespace Geometry
             if (intersection is Point point)
             {
                 return IntersectionUtils.IsIntersect(this, point);
+            }
+            if (intersection is Rectangle rectangle)
+            {
+                return IntersectionUtils.IsIntersect(rectangle, this);
             }
             return false;
         }
