@@ -23,7 +23,15 @@ namespace Geometry.Editor
             Selection.activeGameObject = gameObject;
         }
 
-        [MenuItem("GameObject/MathSimulator/Geometry/Rectangle", priority = 2)]
+        [MenuItem("GameObject/MathSimulator/Geometry/Segment", priority = 2)]
+        public static void CreateSegment()
+        {
+            var gameObject = new GameObject("Segment");
+            gameObject.AddComponent<Segment>();
+            Selection.activeGameObject = gameObject;
+        }
+
+        [MenuItem("GameObject/MathSimulator/Geometry/Rectangle", priority = 3)]
         public static void CreateRectangle()
         {
             var gameObject = new GameObject("Rectangle");

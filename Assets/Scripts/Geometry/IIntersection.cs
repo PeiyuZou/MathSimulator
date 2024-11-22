@@ -5,6 +5,8 @@
     /// </summary>
     public interface IIntersection
     {
+        public IIntersection IntersectionTarget { get; }
+
         bool IntersectWith(IIntersection intersection);
     }
 }

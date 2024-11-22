@@ -48,6 +48,17 @@ namespace Geometry
         }
 
         /// <summary>
+        /// 指定两个线段是否相交
+        /// </summary>
+        /// <param name="segment1"></param>
+        /// <param name="segment2"></param>
+        /// <returns></returns>
+        public static bool IsIntersect(Segment segment1, Segment segment2)
+        {
+            return IsIntersect(segment1.StartPoint, segment1.EndPoint, segment2.StartPoint, segment2.EndPoint);
+        }
+
+        /// <summary>
         /// 扇形和某坐标是否相交
         /// </summary>
         /// <param name="sector"></param>

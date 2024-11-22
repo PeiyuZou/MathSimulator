@@ -13,19 +13,9 @@ namespace Geometry
     /// <summary>
     /// 矩形
     /// </summary>
-    public class Rectangle : MonoBehaviour, IIntersection
+    public class Rectangle : Geometry
     {
         public Vector2 Size = Vector2.one;
-
-        public Color NormalColor = new Color(0, 1f, 0, 0.5f);
-
-        public Color IntersectColor = new Color(1, 0, 0, 0.5f);
-
-        public bool IntersectionTest;
-
-        public GameObject IntersectionGo;
-
-        public IIntersection IntersectionTarget => !IntersectionGo ? null : IntersectionGo.GetComponent<IIntersection>();
 
         private readonly Vector3[] m_Vertices = new Vector3[4];
 
@@ -68,7 +58,7 @@ namespace Geometry
             Handles.DrawSolidRectangleWithOutline(m_Vertices, color, color);
         }
 
-        public bool IntersectWith(IIntersection intersection)
+        public override bool IntersectWith(IIntersection intersection)
         {
             if (intersection is Point point)
             {

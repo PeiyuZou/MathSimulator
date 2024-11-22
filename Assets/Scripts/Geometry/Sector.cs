@@ -12,21 +12,11 @@ namespace Geometry
     /// <summary>
     /// 扇形
     /// </summary>
-    public class Sector : MonoBehaviour, IIntersection
+    public class Sector : Geometry
     {
         public float Radius = 1f;
 
         public float Angle = 120f;
-
-        public Color NormalColor = new Color(0, 1f, 0, 0.5f);
-
-        public Color IntersectColor = new Color(1f, 0, 0, 0.5f);
-
-        public bool IntersectionTest;
-
-        public GameObject IntersectionGo;
-
-        public IIntersection IntersectionTarget => !IntersectionGo ? null : IntersectionGo.GetComponent<IIntersection>();
 
         public Vector2 Center => new Vector2(transform.position.x, transform.position.z);
 
@@ -70,7 +60,7 @@ namespace Geometry
             Handles.DrawSolidArc(transform.position, Vector3.up, fromDirection, Angle, Radius);
         }
 
-        public bool IntersectWith(IIntersection intersection)
+        public override bool IntersectWith(IIntersection intersection)
         {
             if (intersection is Point point)
             {
